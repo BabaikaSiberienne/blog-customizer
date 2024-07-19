@@ -1,5 +1,6 @@
-import { ArrowButton } from '../arrow-button';
+import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
+
 import { useState, useRef, FormEvent, useEffect } from 'react';
 import { Select } from '../select';
 import {
@@ -114,6 +115,7 @@ export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 						onChange={(value: OptionType) =>
 							setFormState({ ...formState, contentWidth: value })
 						}></Select>
+
 
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' onClick={resetData} />

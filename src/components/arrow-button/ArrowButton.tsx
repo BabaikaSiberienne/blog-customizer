@@ -4,8 +4,8 @@ import styles from './ArrowButton.module.scss';
 
 /** Функция для обработки открытия/закрытия формы */
 export type ArrowButtonProps = {
-	closeOnClick: () => void;
-	formOpened: boolean;
+	closeOnClick?: () => void;
+	formOpened?: boolean;
 };
 
 export const ArrowButton = ({ closeOnClick, formOpened }: ArrowButtonProps) => {
@@ -16,7 +16,9 @@ export const ArrowButton = ({ closeOnClick, formOpened }: ArrowButtonProps) => {
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
 			onClick={closeOnClick}
-			className={styles.container}>
+			className={clsx(styles.container, {
+				[styles.container_open]: formOpened,
+			})}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'

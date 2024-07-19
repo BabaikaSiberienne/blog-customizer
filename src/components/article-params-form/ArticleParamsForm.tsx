@@ -1,6 +1,6 @@
 import { ArrowButton } from '../arrow-button';
 import { Button } from 'components/button';
-import { useState, useRef, FormEvent } from 'react';
+import { useState, useRef, FormEvent, useEffect } from 'react';
 import { Select } from '../select';
 import {
 	ArticleStateType,
@@ -43,6 +43,25 @@ export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 
 		setFormState(formState);
 	}
+
+	useEffect(() => {
+		if (!formOpenState) return;
+
+		function handleBackgroundClick(event: MouseEvent) {
+			if (
+				asideRef.current &&
+				!asideRef.current.contains(event.target as Node)
+			) {
+				setFormOpenState(false);
+			}
+		}
+
+		document.addEventListener('mousedown', handleBackgroundClick);
+		return () => {
+			document.removeEventListener('mousedown', handleBackgroundClick);
+		};
+	}, [formOpenState]);
+
 	return (
 		<>
 			<ArrowButton

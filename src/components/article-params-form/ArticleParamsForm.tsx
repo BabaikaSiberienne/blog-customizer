@@ -25,12 +25,12 @@ type ArticleParamsFormProps = {
 export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 	const [formState, setFormState] = useState(defaultArticleState);
 
-	const [formOpenState, setFormOpenState] = useState<boolean>(false);
+	const [isFormOpen, setFormOpenState] = useState<boolean>(false);
 
 	const asideRef = useRef<HTMLFormElement>(null);
 
 	function closeOnArrowButton() {
-		setFormOpenState(!formOpenState);
+		setFormOpenState(!isFormOpen);
 	}
 
 	function resetData() {
@@ -46,7 +46,7 @@ export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 	}
 
 	useEffect(() => {
-		if (!formOpenState) return;
+		if (!isFormOpen) return;
 
 		function handleBackgroundClick(event: MouseEvent) {
 			if (
@@ -61,18 +61,18 @@ export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 		return () => {
 			document.removeEventListener('mousedown', handleBackgroundClick);
 		};
-	}, [formOpenState]);
+	}, [isFormOpen]);
 
 	return (
 		<>
 			<ArrowButton
 				closeOnClick={() => closeOnArrowButton()}
-				formOpened={formOpenState}
+				formOpened={isFormOpen}
 			/>
 			<aside
 				ref={asideRef}
 				className={clsx(styles.container, {
-					[styles.container_open]: formOpenState,
+					[styles.container_open]: isFormOpen,
 				})}>
 				<form className={styles.form} onSubmit={submitData}>
 					<Text as={'h2'} size={31} weight={800} uppercase={true}>
@@ -115,7 +115,6 @@ export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 						onChange={(value: OptionType) =>
 							setFormState({ ...formState, contentWidth: value })
 						}></Select>
-
 
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' onClick={resetData} />

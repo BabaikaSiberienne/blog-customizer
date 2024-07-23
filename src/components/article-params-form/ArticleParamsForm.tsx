@@ -41,8 +41,6 @@ export const ArticleParamsForm = ({ setAppState }: ArticleParamsFormProps) => {
 	function submitData(event: FormEvent) {
 		event.preventDefault();
 		setAppState(formState);
-
-		setFormState(formState);
 	}
 
 	useEffect(() => {
